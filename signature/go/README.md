@@ -1,6 +1,6 @@
 # Go Signature sample code
 
-Contains a barebone json implementation of signature validation + generation.
+Contains a barebone server implementation of signature validation + generation.
 
 It uses the standard http server and libraries, no dependencies needed.
 
