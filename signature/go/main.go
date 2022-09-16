@@ -52,6 +52,7 @@ func authorizations(w http.ResponseWriter, r *http.Request) {
 	body, _ := json.Marshal(response)
 
 	signResponse(body, w, r) // sign response first so headers are written before body
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
 }
 
@@ -72,7 +73,7 @@ func adjustments(w http.ResponseWriter, r *http.Request) {
 	// a blank space ' ', etc. Signing those strings  will make the signature check to fail.
 
 	signResponse(nil, w, r) // write signature headers first
-
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(nil) // write body after adding the response headers
 }
 
