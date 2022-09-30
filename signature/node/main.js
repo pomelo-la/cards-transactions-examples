@@ -4,16 +4,16 @@ const crypto = require("crypto");
 const hostname = "127.0.0.1";
 const port = 1080;
 
-const server = http.createServer(async (req, res) => {
+const server = http.createServer((req, res) => {
   // Setup the two endpoints that Pomelo will hit in order to process card
   // transactions:
-  if (req.url === '/transactions/authorizations') {
+  if (req.url === "/transactions/authorizations") {
     authorizations(req, res);
-  } else if (req.url.startsWith('/transactions/adjustments')) {
+  } else if (req.url.startsWith("/transactions/adjustments")) {
     adjustment(req, res);
-  } else{
-	res.statusCode = 404;
-	res.end();
+  } else {
+    res.statusCode = 404;
+    res.end();
   }
 });
 
@@ -88,7 +88,9 @@ const checkSignature = async (req) => {
   if (signature.startsWith("hmac-sha256")) {
     signature = signature.replace("hmac-sha256 ", "");
   } else {
-    console.log(`Unsupported signature algorithm, expecting hmac-sha256, got ${signature}`);
+    console.log(
+      `Unsupported signature algorithm, expecting hmac-sha256, got ${signature}`
+    );
     return false;
   }
 
@@ -116,7 +118,9 @@ const checkSignature = async (req) => {
   signaturesMatch = crypto.timingSafeEqual(hashResultBytes, signatureBytes);
 
   if (!signaturesMatch) {
-    console.log(`Signature mismatch. Received ${signature}, calculated ${hashResult}`);
+    console.log(
+      `Signature mismatch. Received ${signature}, calculated ${hashResult}`
+    );
     return false;
   }
 
