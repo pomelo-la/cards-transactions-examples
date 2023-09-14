@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const hostname = "127.0.0.1";
 const port = 1080;
 
-const server = http.createServer((req, res) => {
+const server = https.createServer((req, res) => {
   // Setup the two endpoints that Pomelo will hit in order to process card
   // transactions:
   if (req.url === "/transactions/authorizations") {
@@ -17,9 +17,9 @@ const server = http.createServer((req, res) => {
   }
 });
 
-// start http server
+// start https server
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server running at https://${hostname}:${port}/`);
 });
 
 // authorizations is your endpoint to handle card transactions that you can
